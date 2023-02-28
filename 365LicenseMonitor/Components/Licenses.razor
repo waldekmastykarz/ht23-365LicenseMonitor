@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+
+<h3>Licenses</h3>
+@inject GraphServiceClient GraphClient
+
+<MudTable Items="@subscribedSkus" Dense="true" Hover="false" Bordered="true" Striped="true" FixedHeader="true" RowsPerPage="25" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">License table</MudText>
+            <MudSpacer />
+        </ToolBarContent>
+        <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.SubscribedSku, object>(x=>x.SkuId)">SKU ID</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.SubscribedSku, object>(x=>x.SkuPartNumber)">SkuPartNumber</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.SubscribedSku, object>(x=>x.ConsumedUnits)">ConsumedUnits</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.SubscribedSku, object>(x=>x.PrepaidUnits.Enabled)">PrepaidUnits</MudTableSortLabel></MudTh>
+    </HeaderContent>
+        <RowTemplate>
+        <MudTd DataLabel="Nr">@context.SkuId</MudTd>
+        <MudTd DataLabel="Sign">@context.SkuPartNumber</MudTd>
+        <MudTd DataLabel="Name">@context.ConsumedUnits</MudTd>
+        <MudTd DataLabel="Name">@context.PrepaidUnits.Enabled</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 100%"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="6" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+

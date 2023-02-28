@@ -1,0 +1,9 @@
+﻿@page "/testpage"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+@inject GraphServiceClient GraphClient
+
+<PageTitle>TestPage</PageTitle>
+
+<Test />

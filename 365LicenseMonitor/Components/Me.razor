@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@attribute [Authorize]
+@inject GraphServiceClient GraphClient
+@inject NavigationManager Navigation
+
+@* Gets the details of the currently logged in user *@
+@if (user == null)
+{
+    <MudSkeleton SkeletonType="SkeletonType.Circle" Width="50px" Height="50px" />
+    <MudSkeleton Width="200px" />
+}
+else
+{
+    <MudStack Row="true">
+        <MudPaper Class="pa-3" Elevation="0"><Photo PhotoSize=Size.Large /></MudPaper>
+        <MudPaper Class="pa-3" Elevation="0">
+            <MudStack Spacing="1">
+                <MudText>@user.DisplayName</MudText>
+                <MudText>@user.UserPrincipalName</MudText>
+            </MudStack>
+        </MudPaper>
+    </MudStack>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="BeginLogOut">Log out</MudButton>
+
+}
+
+@code {
+        private Microsoft.Graph.User? user;
+
+         protected override async Task OnInitializedAsync()
+    {
+        user = await GraphClient.Me.Request().GetAsync();
+    }
+    public void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+}

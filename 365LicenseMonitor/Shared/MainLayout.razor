@@ -1,0 +1,74 @@
+﻿@inherits LayoutComponentBase
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+        <MudAppBar Elevation="1">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h6" Class="px-4">365 License Monitor</MudText>
+        <MudSpacer />
+
+        @* Dark mode button *@
+        <MudToggleIconButton @bind-Toggled="_isDarkMode" @onclick="EnableDarkMode"
+        Icon="@Icons.Material.Outlined.DarkMode" Color="@Color.Inherit" Title="DarkMode"
+        ToggledIcon="@Icons.Material.Filled.WbSunny" ToggledTitle="LightMode" />
+
+
+        @* Settings menu *@
+        <MudIconButton Icon="@Icons.Material.Filled.Settings" 
+        Color="Color.Inherit" OnClick="SettingsButtonClicked">Settings</MudIconButton>
+
+        @* About message box*@
+        <About />
+
+        @* Login menu. Shows the Login Display, and user details if clicked on. *@
+        <MudMenu AnchorOrigin="Origin.TopRight" TransformOrigin="Origin.TopRight">
+            <ActivatorContent>
+                <LoginDisplay />
+            </ActivatorContent>
+            <ChildContent>
+                <MudPaper Elevation="0" Style="padding: 10px">
+                    <Me />
+                </MudPaper>
+            </ChildContent>
+        </MudMenu>
+
+
+@*Settings message box*@
+<MudMessageBox @ref="settingsmbox" Title="Settings" CancelText="">
+    <MessageContent>
+        <div style="min-width:300px;">
+            <MudForm @ref="settingsForm">
+                <MudGrid>
+                    <MudItem xs="6">
+                        <span>Reset all settings to defaults</span>
+                    </MudItem>
+                    <MudItem xs="6" style="text-align:right;">
+                        <MudButton Variant="Variant.Filled" OnClick="ResetAllSettings">Reset</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        </div>
+    </MessageContent>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Success">OK</MudButton>
+    </YesButton>
+</MudMessageBox>
+
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" Elevation="2">
+        <MudDrawerHeader Class="@headerStyle"></MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer Class="mt-5 px-8" MaxWidth="MaxWidth.False">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+    <MudScrollToTop>
+        <MudFab Color="Color.Tertiary" Icon="@Icons.Material.Filled.ArrowCircleUp" />
+    </MudScrollToTop>
+</MudLayout>

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+@inject GraphServiceClient GraphClient
+
+@if (photo == null)
+{
+    <p><em>Loading...</em></p>
+}
+else {
+    <MudAvatar Size=@PhotoSize Image="@($"data:image/png;base64,{image}")" />
+}
+
+@code {
+
+    private Stream? photo;
+    private string? image;
+
+    protected override async Task OnInitializedAsync()
+    {
+        photo = await GraphClient.Me.Photo.Content.Request().GetAsync();
+        image = Convert.ToBase64String((photo as MemoryStream).ToArray());
+    }
+
+    [Parameter]
+    public MudBlazor.Size PhotoSize { get; set; } = Size.Medium; // Default size will be medium, otherwise specify another size when calling this component
+
+}

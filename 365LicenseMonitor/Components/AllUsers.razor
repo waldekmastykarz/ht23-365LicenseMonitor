@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+@inject GraphServiceClient GraphClient
+
+@if (allUsers == null)
+{
+        <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@allUsers" Dense="true" Hover="false" Bordered="true" Striped="true" FixedHeader="true" RowsPerPage="25" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info" Filter="new Func<Microsoft.Graph.User,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Users</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            <MudButton Variant="Variant.Filled" OnClick="SearchUsersAsync">Search</MudButton>
+        </ToolBarContent>
+            <HeaderContent>
+                <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.DisplayName)">Display Name</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.Mail)">Email</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.UserPrincipalName)">User Principal Name</MudTableSortLabel></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+
+                    <MudTd DataLabel="Nr">@context.DisplayName</MudTd>
+                    <MudTd DataLabel="Sign">@context.Mail</MudTd>
+                    <MudTd DataLabel="Name">@context.UserPrincipalName</MudTd>
+            </RowTemplate>
+        <PagerContent>
+            <MudTablePager/>
+        </PagerContent>
+        </MudTable>
+}
+
+@code {
+    // Search method
+    private async Task SearchUsersAsync()
+    {
+        //allUsers = await GetAllUsersAsync(searchString1);
+        var queryOptions = new List<QueryOption>();
+
+        if (searchString1 != "")
+        {
+            string buildStr = "\"displayName: " + searchString1 + "\""; // build the search string, e.g. displayName, userPrincipalName seems to require exact match
+            queryOptions.Add(new QueryOption("$search", buildStr));
+        }
+        else
+        {
+            queryOptions.Add(new QueryOption("$count", "true"));
+        }
+        allUsers = await GraphClient.Users.Request(queryOptions).Top(999).Header("ConsistencyLevel", "eventual").GetAsync();
+    }
+
+    // Get all the users
+    private bool _loading;
+    private int maxResults = 500;
+
+    private IEnumerable<Microsoft.Graph.User>? allUsers;
+    protected override async Task OnInitializedAsync()
+    {        
+        // Either get one page of user up to 999
+        var queryOptions = new List<QueryOption>
+        {
+            new QueryOption("$filter", "userType eq 'member'")
+        };
+        allUsers = await GraphClient.Users.Request(queryOptions).Top(maxResults).GetAsync();
+        // or call the method to get them all
+        //allUsers = await GetAllUsersAsync();
+    }
+
+    private async Task<IEnumerable<Microsoft.Graph.User>> GetAllUsersAsync()
+    {
+        var queryOptions = new List<QueryOption>
+    {
+        //new QueryOption("$filter", "userType eq 'member'") // could add another filter in here
+        new QueryOption("$count", "true")
+
+    };
+        var users = new List<Microsoft.Graph.User>();
+
+        var page = await GraphClient.Users.Request(queryOptions).Header("ConsistencyLevel", "eventual").GetAsync();
+        users.AddRange(page);
+        while (page.NextPageRequest != null)
+        {
+            page = await page.NextPageRequest.GetAsync();
+            users.AddRange(page);
+        }
+
+        return users;
+    }
+
+    // Filtering the table (without refreshing search)
+    private Microsoft.Graph.User selectedItem1 = null;
+    private HashSet<Microsoft.Graph.User> selectedItems = new HashSet<Microsoft.Graph.User>();
+
+    // MudTable search function
+    private string searchString1 = "";
+    private bool FilterFunc1(Microsoft.Graph.User user) => FilterFunc(user, searchString1);
+
+    private bool FilterFunc(Microsoft.Graph.User user, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+
+        if (user.DisplayName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (string.IsNullOrWhiteSpace(user.Mail))
+        {        }
+        else
+        {
+            if (user.Mail.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+
+        if (user.UserPrincipalName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+}

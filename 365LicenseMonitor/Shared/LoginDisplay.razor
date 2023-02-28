@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+
+@*Shows the Login button, Name and Photo in the appbar *@
+<AuthorizeView>
+    <Authorized>
+        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+        <MudText>@context.User.Identity?.Name </MudText>
+        <Photo />
+        </MudStack>
+</Authorized>
+    <NotAuthorized>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="authentication/login">Log in</MudButton>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+
+}

@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+@inject GraphServiceClient GraphClient
+
+
+@if (allUsers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@allUsers" Dense="true" Hover="false" Bordered="true" Striped="true" FixedHeader="true" RowsPerPage="25" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Users</MudText>
+            <MudSpacer />
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.DisplayName)">Display Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.Mail)">Email</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Microsoft.Graph.User, object>(x=>x.UserPrincipalName)">User Principal Name</MudTableSortLabel></MudTh>
+        </HeaderContent>
+        <RowTemplate>
+
+            <MudTd DataLabel="Nr">@context.DisplayName</MudTd>
+            <MudTd DataLabel="Sign">@context.Mail</MudTd>
+            <MudTd DataLabel="Name">@context.UserPrincipalName</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+}
+
+@code {
+    private bool _loading;
+    private string errorMessage = "No errors";
+
+    private IEnumerable<Microsoft.Graph.User>? allUsers;
+    protected override async Task OnInitializedAsync()
+    {
+        // Either get one page of user up to 999
+        var queryOptions = new List<QueryOption>
+        {
+            //new QueryOption("$filter", "userType eq 'guest'"),
+            new QueryOption("$filter", "userType eq 'member'")
+        };
+        allUsers = await GraphClient.Users.Request(queryOptions).Top(200).GetAsync();
+
+        // or call the method to get them all
+        //allUsers = await GetAllUsersAsync();
+    }
+
+    // method with paging
+    private async Task<IEnumerable<Microsoft.Graph.User>> GetAllUsersAsync()
+    {
+        var queryOptions = new List<QueryOption>
+    {
+        new QueryOption("$count", "true")
+    };
+        var users = new List<Microsoft.Graph.User>();
+
+        var page = await GraphClient.Users.Request(queryOptions).Header("ConsistencyLevel", "eventual").GetAsync();
+        users.AddRange(page);
+        while (page.NextPageRequest != null)
+        {
+            page = await page.NextPageRequest.GetAsync();
+            users.AddRange(page);
+        }
+        return users;
+    }
+
+    // trying to catch errors did not work
+        //try
+        //{
+        //    allUsers = await GraphClient.Users.Request(queryOptions).GetAsync();
+
+        //}
+        //catch (ServiceException ex) when (ex.StatusCode == System.Net.HttpStatusCode.BadRequest)// using catch (Exception ex) also doesn't work
+        //{
+        //    Console.WriteLine("Error getting users from Graph: " + ex.Message);
+        //    Console.WriteLine("Error code: " + ex.Error.Code);
+        //    Console.WriteLine("Error inner message: " + ex.Error.InnerError.Message);
+
+        //    // Show error message to the user or log the error
+        //    errorMessage = "An error occurred while trying to get users from the Microsoft Graph API.";
+        //}
+        //Console.WriteLine(errorMessage);
+    //}
+}

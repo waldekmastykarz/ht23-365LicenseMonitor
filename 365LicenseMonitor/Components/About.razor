@@ -1,0 +1,27 @@
+﻿@* About message box content *@
+
+<MudIconButton Icon="@Icons.Material.Filled.Help" Color="Color.Inherit" OnClick="AboutButtonClicked">About</MudIconButton>
+<MudMessageBox @ref="aboutmbox" Title="365 License Monitor" CancelText="">
+    <MessageContent>
+        Multitenant Graph app using Blazor WASM, Microsoft Identity and MS Graph AIP<br /><br />
+        Copyright 2023, Cloudrun Ltd.<br /><br />
+        <a href="https://cloudrun.co.uk">cloudrun.co.uk</a><br /><br />
+        Version 0.1
+        <br />
+    </MessageContent>
+    <YesButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary">OK</MudButton>
+    </YesButton>
+</MudMessageBox>
+
+@code {
+    MudMessageBox? aboutmbox { get; set; }
+    string aboutstate = "Message box hasn't been opened yet";
+
+    private async void AboutButtonClicked()
+    {
+        bool? result = await aboutmbox.Show();
+        aboutstate= result==null ? "Cancelled" : "Deleted!";
+        StateHasChanged();
+    }
+}
