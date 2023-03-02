@@ -12,14 +12,14 @@
         </ToolBarContent>
         <HeaderContent>
         <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.ProductName)">ProductName</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.SkuId)">SkuId</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.PrepaidUnits)">PrepaidUnits</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.ConsumedUnits)">ConsumedUnits</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.UnusedUnits)">UnusedUnits</MudTableSortLabel></MudTh>
     </HeaderContent>
         <RowTemplate>
         <MudTd DataLabel="Nr">@context.ProductName</MudTd>
-        <MudTd DataLabel="Nr">@context.SkuId</MudTd>
         <MudTd DataLabel="Sign">@context.PrepaidUnits</MudTd>
+        <MudTd DataLabel="Sign">@context.ConsumedUnits</MudTd>
         <MudTd DataLabel="Name">@context.UnusedUnits</MudTd>
         </RowTemplate>
         <PagerContent>
