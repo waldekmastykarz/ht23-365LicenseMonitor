@@ -36,6 +36,9 @@ namespace _365LicenseMonitor.Components
 
         static IDictionary GUIDsToProductNames = new Dictionary<string, string>
         {
+            ["4b74a65c-8b4a-4fc8-9f6b-5177ed11ddfa"] = "Power Virtual Agent User License",
+            ["6070a4c8-34c6-4937-8dfb-39bbc6397a60"] = "Microsoft Teams Rooms Standard",
+            ["3f9f06f5-3c31-472c-985f-62d9c10ec167"] = "Power Pages vTrial for Makers",
             ["9c0587f3-8665-4252-a8ad-b7a5ade57312"] = "Microsoft365_Lighthouse",
             ["de176c31-616d-4eae-829a-718918d7ec23"] = "CRM_HYBRIDCONNECTOR",
             ["e4654015-5daf-4a48-9b37-4f309dddd88b"] = "Advanced Communications",
