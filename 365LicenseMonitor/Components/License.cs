@@ -36,6 +36,8 @@ namespace _365LicenseMonitor.Components
 
         static IDictionary GUIDsToProductNames = new Dictionary<string, string>
         {
+            ["9c0587f3-8665-4252-a8ad-b7a5ade57312"] = "Microsoft365_Lighthouse",
+            ["de176c31-616d-4eae-829a-718918d7ec23"] = "CRM_HYBRIDCONNECTOR",
             ["e4654015-5daf-4a48-9b37-4f309dddd88b"] = "Advanced Communications",
             ["d2dea78b-507c-4e56-b400-39447f4738f8"] = "AI Builder Capacity add-on",
             ["8f0c5670-4e56-4892-b06d-91c085d7004f"] = "App Connect IW",
