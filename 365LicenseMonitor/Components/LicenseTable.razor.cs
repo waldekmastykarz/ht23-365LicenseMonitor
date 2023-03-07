@@ -1,6 +1,6 @@
 ﻿namespace _365LicenseMonitor.Components
 {
-    partial class Licenses
+    partial class LicenseTable
 {
         private bool _loading;
 

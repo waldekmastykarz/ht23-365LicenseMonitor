@@ -2,7 +2,6 @@
 @using Microsoft.Graph
 @attribute [Authorize]
 
-<h3>Licenses</h3>
 @inject GraphServiceClient GraphClient
 
 <MudTable Items="@LicenseList" Dense="true" Hover="false" Bordered="true" Striped="true" FixedHeader="true" RowsPerPage="25" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
@@ -17,10 +16,10 @@
         <MudTh><MudTableSortLabel SortBy="new Func<License, object>(x=>x.UnusedUnits)">UnusedUnits</MudTableSortLabel></MudTh>
     </HeaderContent>
         <RowTemplate>
-        <MudTd DataLabel="Nr">@context.ProductName</MudTd>
-        <MudTd DataLabel="Sign">@context.PrepaidUnits</MudTd>
-        <MudTd DataLabel="Sign">@context.ConsumedUnits</MudTd>
-        <MudTd DataLabel="Name">@context.UnusedUnits</MudTd>
+        <MudTd DataLabel="ProductName">@context.ProductName</MudTd>
+        <MudTd DataLabel="PrepaidUnits">@context.PrepaidUnits</MudTd>
+        <MudTd DataLabel="ConsumedUnits">@context.ConsumedUnits</MudTd>
+        <MudTd DataLabel="UnusedUnits">@context.UnusedUnits</MudTd>
         </RowTemplate>
         <PagerContent>
             <MudTablePager />

@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Graph
+@attribute [Authorize]
+
+<MudText Typo="Typo.h5">License Charts</MudText>
+@inject GraphServiceClient GraphClient
+
+            <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+            <MudGrid>
+
+@foreach (var category in CategoryList)
+{
+    List<License> filteredLicenseList = LicenseList.Where(x => x.Category == category.CategoryName).ToList();
+
+    
+    @if (filteredLicenseList.Count > 0) // only show if there is something in the category
+    {
+
+                @foreach (var item in filteredLicenseList)
+                {
+                    int? used = item.ConsumedUnits;
+                    int? unused = item.UnusedUnits;
+                    string[] labels = { "Used", "Spare" };
+                    <MudItem xs=12 md=3 sm=6>
+                        @*<MudPaper Elevation="2" Class="pa-4" Style="height: 350px;">
+                            <MudText Typo="Typo.h6" Style="font-size: 16px;" Align="Align.Center">@item.ProductName</MudText>
+                            @if (used is not null && unused is not null)
+                            {
+                                double[] data = { Convert.ToDouble(used), Convert.ToDouble(unused) };
+                                <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Bottom" ChartOptions="@chartPallette" Width="200px" Height="200px"
+                          InputData="@data" InputLabels="@labels">
+                                    <CustomGraphics>
+                                        <text class="donut-inner-text" style="font-size: 3px" x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Used: @item.ConsumedUnits</text>
+                                        <text class="donut-inner-text" style="font-size: 3px" x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Spare: @item.UnusedUnits</text>
+                                    </CustomGraphics>
+                                </MudChart>
+                            }
+                        </MudPaper>*@
+                        <MudCard Style="height: 350px;">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h6" Style="font-size: 16px;">@item.ProductName</MudText>
+                                </CardHeaderContent>
+@*                                <CardHeaderActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                                </CardHeaderActions>*@
+                            </MudCardHeader>
+                            <MudCardContent>
+                                @if (used is not null && unused is not null)
+                                {
+                                    double[] data = { Convert.ToDouble(used), Convert.ToDouble(unused) };
+                                    <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Bottom" ChartOptions="@chartPallette" Width="200px" Height="200px"
+                              InputData="@data" InputLabels="@labels">
+                                        <CustomGraphics>
+                                            <text class="donut-inner-text" style="font-size: 3px" x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Used: @item.ConsumedUnits</text>
+                                            <text class="donut-inner-text" style="font-size: 3px" x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Spare: @item.UnusedUnits</text>
+                                        </CustomGraphics>
+                                    </MudChart>
+                                }
+                            </MudCardContent>
+@*                            <MudCardActions>
+                                <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
+                            </MudCardActions>*@
+                        </MudCard>
+                    </MudItem>
+                }
+
+    }
+
+}
+    </MudGrid>
+</MudContainer>
