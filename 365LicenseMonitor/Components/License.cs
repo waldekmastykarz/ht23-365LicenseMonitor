@@ -65,7 +65,7 @@ namespace _365LicenseMonitor.Components
             }
             catch (KeyNotFoundException)
             {
-                Console.WriteLine($"Could not find Product Name for key {SkuId} {SkuPartNumber}");
+                Console.WriteLine($"Could not find Product Name for key {SkuId} {SkuPartNumber} Assigned: {ConsumedUnits} Purchased: {PrepaidUnits}");
             }
         }
 
@@ -437,7 +437,11 @@ namespace _365LicenseMonitor.Components
             ["6470687e-a428-4b7a-bef2-8a291ad947c9"] = new LicenseProperty("Windows Store for Business", "Add-ons"),
             ["c7e9d9e6-1981-4bf3-bb50-a5bdfaa06fb2"] = new LicenseProperty("Windows Store for Business EDU Faculty", "Add-ons"),
             ["9c0587f3-8665-4252-a8ad-b7a5ade57312"] = new LicenseProperty("Microsoft 365 Lighthouse", "Add-ons"),
-            ["de176c31-616d-4eae-829a-718918d7ec23"] = new LicenseProperty("Dynamics 365 Hybrid Connector (GCC)", "Dynamics 365")
+            ["de176c31-616d-4eae-829a-718918d7ec23"] = new LicenseProperty("Dynamics 365 Hybrid Connector (GCC)", "Dynamics 365"),
+            ["a929cd4d-8672-47c9-8664-159c1f322ba8"] = new LicenseProperty("Microsoft Intune Suite Trial", "Security and identity"),
+            ["4b74a65c-8b4a-4fc8-9f6b-5177ed11ddfa"] = new LicenseProperty("Power Virtual Agents Viral Trial", "Power Platform"),
+            ["6070a4c8-34c6-4937-8dfb-39bbc6397a60"] = new LicenseProperty("Microsoft Teams Rooms Standard", "Communication"),
+            ["3f9f06f5-3c31-472c-985f-62d9c10ec167"] = new LicenseProperty("Power Pages vTrial for Makers", "Power Platform")
         };
 
     }

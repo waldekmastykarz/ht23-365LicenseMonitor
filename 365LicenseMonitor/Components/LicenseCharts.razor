@@ -5,38 +5,21 @@
 <MudText Typo="Typo.h5">License Charts</MudText>
 @inject GraphServiceClient GraphClient
 
-            <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-            <MudGrid>
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <MudGrid>
 
 @foreach (var category in CategoryList)
 {
     List<License> filteredLicenseList = LicenseList.Where(x => x.Category == category.CategoryName).ToList();
 
-    
     @if (filteredLicenseList.Count > 0) // only show if there is something in the category
     {
-
                 @foreach (var item in filteredLicenseList)
                 {
                     int? used = item.ConsumedUnits;
                     int? unused = item.UnusedUnits;
                     string[] labels = { "Used", "Spare" };
                     <MudItem xs=12 md=3 sm=6 lg=3 xl="2" xxl="2">
-                        @*<MudPaper Elevation="2" Class="pa-4" Style="height: 350px;">
-                            <MudText Typo="Typo.h6" Style="font-size: 16px;" Align="Align.Center">@item.ProductName</MudText>
-                            @if (used is not null && unused is not null)
-                            {
-                                double[] data = { Convert.ToDouble(used), Convert.ToDouble(unused) };
-                                <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Bottom" ChartOptions="@chartPallette" Width="200px" Height="200px"
-                          InputData="@data" InputLabels="@labels">
-                                    <CustomGraphics>
-                                        <text class="donut-inner-text" style="font-size: 3px" x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Used: @item.ConsumedUnits</text>
-                                        <text class="donut-inner-text" style="font-size: 3px" x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Spare: @item.UnusedUnits</text>
-                                    </CustomGraphics>
-                                </MudChart>
-                            }
-                        </MudPaper>*@
-                       @* <MudCard Style="height: 350px;">*@
                             <MudCard>
                             <MudCardHeader>
                                 <CardHeaderContent>
@@ -61,8 +44,6 @@
                             </MudCardContent>
                          <MudCardActions>
                                 <MudChip Variant="Variant.Text" Style="@($"color:{category.Colour}; background:{category.Background};")">@item.Category</MudChip>
-                            @*<MudChip Variant="Variant.Text" Color="Color.Primary">@item.Category</MudChip>*@
-                            @*  <MudButton Variant="Variant.Text" Color="Color.Secondary">Read More</MudButton>*@
                             </MudCardActions>
                         </MudCard>
                     </MudItem>
