@@ -21,7 +21,7 @@
                     int? used = item.ConsumedUnits;
                     int? unused = item.UnusedUnits;
                     string[] labels = { "Used", "Spare" };
-                    <MudItem xs=12 md=3 sm=6>
+                    <MudItem xs=12 md=3 sm=6 lg=3 xl="2" xxl="2">
                         @*<MudPaper Elevation="2" Class="pa-4" Style="height: 350px;">
                             <MudText Typo="Typo.h6" Style="font-size: 16px;" Align="Align.Center">@item.ProductName</MudText>
                             @if (used is not null && unused is not null)
@@ -36,10 +36,11 @@
                                 </MudChart>
                             }
                         </MudPaper>*@
-                        <MudCard Style="height: 350px;">
+                       @* <MudCard Style="height: 350px;">*@
+                            <MudCard>
                             <MudCardHeader>
                                 <CardHeaderContent>
-                                    <MudText Typo="Typo.h6" Style="font-size: 16px;">@item.ProductName</MudText>
+                                    <MudText Typo="Typo.h6" Style="font-size: 14px;">@item.ProductName</MudText>
                                 </CardHeaderContent>
 @*                                <CardHeaderActions>
                                     <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
@@ -58,9 +59,11 @@
                                     </MudChart>
                                 }
                             </MudCardContent>
-@*                            <MudCardActions>
-                                <MudButton Variant="Variant.Text" Color="Color.Primary">Read More</MudButton>
-                            </MudCardActions>*@
+                         <MudCardActions>
+                                <MudChip Variant="Variant.Text" Style="@($"color:{category.Colour}; background:{category.Background};")">@item.Category</MudChip>
+                            @*<MudChip Variant="Variant.Text" Color="Color.Primary">@item.Category</MudChip>*@
+                            @*  <MudButton Variant="Variant.Text" Color="Color.Secondary">Read More</MudButton>*@
+                            </MudCardActions>
                         </MudCard>
                     </MudItem>
                 }
