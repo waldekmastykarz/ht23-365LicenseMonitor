@@ -57,7 +57,7 @@ namespace _365LicenseMonitor.Components
             }
             catch (KeyNotFoundException)
             {
-                Console.WriteLine($"Could not find Product Name for key {SkuId}");
+                Console.WriteLine($"Could not find Product Name for key {SkuId} {SkuPartNumber}");
             }
             try
             {
@@ -65,7 +65,7 @@ namespace _365LicenseMonitor.Components
             }
             catch (KeyNotFoundException)
             {
-                Console.WriteLine($"Could not find Product Name for key {SkuId}");
+                Console.WriteLine($"Could not find Product Name for key {SkuId} {SkuPartNumber}");
             }
         }
 
@@ -435,8 +435,9 @@ namespace _365LicenseMonitor.Components
             ["fb019e88-26a0-4218-bd61-7767d109ac26"] = new LicenseProperty("Windows 365 Shared Use 8 vCPU 32 GB 256 GB", "Windows 365"),
             ["f4dc1de8-8c94-4d37-af8a-1fca6675590a"] = new LicenseProperty("Windows 365 Shared Use 8 vCPU 32 GB 512 GB", "Windows 365"),
             ["6470687e-a428-4b7a-bef2-8a291ad947c9"] = new LicenseProperty("Windows Store for Business", "Add-ons"),
-            ["c7e9d9e6-1981-4bf3-bb50-a5bdfaa06fb2"] = new LicenseProperty("Windows Store for Business EDU Faculty", "Add-ons")
-
+            ["c7e9d9e6-1981-4bf3-bb50-a5bdfaa06fb2"] = new LicenseProperty("Windows Store for Business EDU Faculty", "Add-ons"),
+            ["9c0587f3-8665-4252-a8ad-b7a5ade57312"] = new LicenseProperty("Microsoft 365 Lighthouse", "Add-ons"),
+            ["de176c31-616d-4eae-829a-718918d7ec23"] = new LicenseProperty("Dynamics 365 Hybrid Connector (GCC)", "Dynamics 365")
         };
 
     }
