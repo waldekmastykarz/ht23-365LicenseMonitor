@@ -8,17 +8,16 @@ namespace _365LicenseMonitor.Components
     {
         public string CategoryName { get; set; }
         public bool Visible { get; set; }
-        public string Colour { get; set; }
-        public string Background { get; set; }
+        public MudBlazor.Color Colour { get; set; }
 
-        public LicenseCategory(string CategoryName, bool Visible, string Colour, string Background)
+        public LicenseCategory(string CategoryName, bool Visible, MudBlazor.Color Colour)
         {
             this.CategoryName = CategoryName;
             this.Visible = Visible;
             this.Colour = Colour;
-            this.Background=Background;
         }
     }
+
 
     // LicenseProperty class is used as the value in LicenseDictionary, to look up both ProductName and Category together, which avoids having 2 dictionaries
     public class LicenseProperty
@@ -82,6 +81,24 @@ namespace _365LicenseMonitor.Components
                 " | " + "ProductName: " + ProductName +
                 " | " + "Category: " + Category;
         }
+
+
+        // Create a list of categories
+        public static List<LicenseCategory> CategoryList = new List<LicenseCategory> {
+        new LicenseCategory("Microsoft 365", true, MudBlazor.Color.Primary),
+        new LicenseCategory("Office 365", true, MudBlazor.Color.Secondary),
+        new LicenseCategory("Business apps", true, MudBlazor.Color.Warning),
+        new LicenseCategory("Communication", true, MudBlazor.Color.Info),
+        new LicenseCategory("Dynamics 365", true, MudBlazor.Color.Tertiary),
+        new LicenseCategory("Security and identity", true, MudBlazor.Color.Error),
+        new LicenseCategory("Power BI", true, MudBlazor.Color.Default),
+        new LicenseCategory("Windows", true, MudBlazor.Color.Error),
+        new LicenseCategory("Windows 365", true, MudBlazor.Color.Inherit),
+        new LicenseCategory("Other services", true, MudBlazor.Color.Surface),
+        new LicenseCategory("Add-ons", true, MudBlazor.Color.Dark),
+        new LicenseCategory("Power Platform", true, MudBlazor.Color.Warning),
+        };
+
 
         // Create a dictionary which maps SkuIds to Product Names as per https://learn.microsoft.com/en-us/azure/active-directory/enterprise-users/licensing-service-plan-reference
 

@@ -1,10 +1,9 @@
-﻿@page "/"
+﻿@page "/table"
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.Graph
 @attribute [Authorize]
 @inject GraphServiceClient GraphClient
 
-<PageTitle>License Monitor</PageTitle>
+<PageTitle>License Table</PageTitle>
 
-
-<LicenseCharts />
+<LicenseTable />

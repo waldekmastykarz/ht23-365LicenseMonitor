@@ -2,53 +2,67 @@
 @using Microsoft.Graph
 @attribute [Authorize]
 
-<MudText Typo="Typo.h5">License Charts</MudText>
+<MudGrid>
+    <MudItem xs="3" md="2">
+        <MudText Typo="Typo.h5">License Charts</MudText>
+    </MudItem>
+    <MudItem xs="9" md="3">
+        <MudSelect T="string" Label="Show or hide categories" HelperText="" SelectAll="true" MultiSelection="true">
+            @foreach (var category in License.CategoryList)
+            {
+                <MudSelectItem T="string" Value="@category.CategoryName">@category.CategoryName</MudSelectItem>
+            }
+        </MudSelect>
+    </MudItem>
+</MudGrid>
+
+
 @inject GraphServiceClient GraphClient
 
 <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
     <MudGrid>
 
-@foreach (var category in CategoryList)
+@foreach (var category in License.CategoryList)
 {
-    List<License> filteredLicenseList = LicenseList.Where(x => x.Category == category.CategoryName).ToList();
-
-    @if (filteredLicenseList.Count > 0) // only show if there is something in the category
+    if (category.Visible)
     {
-                @foreach (var item in filteredLicenseList)
-                {
-                    int? used = item.ConsumedUnits;
-                    int? unused = item.UnusedUnits;
-                    string[] labels = { "Used", "Spare" };
-                    <MudItem xs=12 md=3 sm=6 lg=3 xl="2" xxl="2">
-                        <MudCard Style="height: 400px;"> @*CSS hack so that the title always takes up the same space*@
-                            <MudCardHeader Style="max-height: 50px">
-                                <CardHeaderContent >
-                                    <MudText Typo="Typo.h6" Style="font-size: 14px;">@item.ProductName</MudText>
-                                </CardHeaderContent>
-@*                                <CardHeaderActions>
-                                    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
-                                </CardHeaderActions>*@
-                            </MudCardHeader>
-                            <MudCardContent>
-                                @if (used is not null && unused is not null)
-                                {
-                                    double[] data = { Convert.ToDouble(used), Convert.ToDouble(unused) };
-                                    <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Bottom" ChartOptions="@chartPallette" Width="200px" Height="200px"
-                              InputData="@data" InputLabels="@labels">
-                                        <CustomGraphics>
-                                            <text class="donut-inner-text" style="font-size: 3px" x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Used: @item.ConsumedUnits</text>
-                                            <text class="donut-inner-text" style="font-size: 3px" x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="5">Spare: @item.UnusedUnits</text>
-                                        </CustomGraphics>
-                                    </MudChart>
-                                }
-                            </MudCardContent>
-                         <MudCardActions>
-                                <MudChip Variant="Variant.Text" Style="@($"color:{category.Colour}; background:{category.Background};")">@item.Category</MudChip>
-                            </MudCardActions>
-                        </MudCard>
-                    </MudItem>
-                }
+                
+        List<License> filteredLicenseList = LicenseList.Where(x => x.Category == category.CategoryName).ToList(); // only show licenses in this category
 
+        @if (filteredLicenseList.Count > 0) // only show if there is something in the category
+        {
+            @foreach (var item in filteredLicenseList)
+            {
+                int? used = item.ConsumedUnits;
+                int? unused = item.UnusedUnits;
+                string[] labels = { $"Used: {item.ConsumedUnits}", $"Spare: {item.UnusedUnits}" };
+                <MudItem xs=12 md=3 sm=6 lg=3 xl="2" xxl="2">
+                    <MudCard Style="height: 400px;"> @* Ensure that the title always takes up the same space *@
+                        <MudCardHeader Style="max-height: 50px">
+                            <CardHeaderContent >
+                                <MudText Typo="Typo.h6" Style="font-size: 14px;">@item.ProductName</MudText>
+                            </CardHeaderContent>
+@*                                <CardHeaderActions>
+                                <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+                            </CardHeaderActions>*@
+                        </MudCardHeader>
+                        <MudCardContent Style="max-height: 285px;"> @* when licenses number is large, stops chip being too low *@
+                            @if (used is not null && unused is not null)
+                            {
+                                double[] data = { Convert.ToDouble(used), Convert.ToDouble(unused) };
+                                <MudChart ChartType="ChartType.Donut" LegendPosition="Position.Bottom" ChartOptions="@chartPallette" Width="200px" Height="200px"
+                                InputData="@data" InputLabels="@labels">
+                                </MudChart>
+                            }
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudChip Variant="Variant.Text" Color="@category.Colour">@item.Category</MudChip>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
+
+        }
     }
 
 }

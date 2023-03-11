@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="MyCustomTheme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
@@ -35,7 +35,6 @@
                 </MudPaper>
             </ChildContent>
         </MudMenu>
-
 
 @*Settings message box*@
 <MudMessageBox @ref="settingsmbox" Title="Settings" CancelText="">

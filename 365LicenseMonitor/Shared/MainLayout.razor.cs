@@ -4,6 +4,22 @@ namespace _365LicenseMonitor.Shared
 {
     partial class MainLayout
 {
+        MudTheme MyCustomTheme = new MudTheme() // override default colors
+        {
+            Palette = new Palette()
+            {
+                Error = Colors.Yellow.Darken2,
+                Warning = Colors.Green.Darken2,
+                Dark = Colors.BlueGrey.Default,
+            },
+            
+            PaletteDark = new PaletteDark()
+            {
+                Error = Colors.Yellow.Darken2,
+                Warning = Colors.Green.Darken2,
+                Dark = Colors.BlueGrey.Default,
+            },
+        };
 
         bool _drawerOpen = true;
         void DrawerToggle()
@@ -29,13 +45,6 @@ namespace _365LicenseMonitor.Shared
                 _isDarkMode = true;
                 await localStorage.SetItemAsync("darkmode", true);
             }
-
-        }
-
-        // Firstrun event handler
-        private async Task StartupCheckedHandler(bool userChecked)
-        {
-
         }
 
         // Settings message box
