@@ -86,7 +86,7 @@ namespace _365LicenseMonitor.Components
         // Create a list of categories
         public static List<LicenseCategory> CategoryList = new List<LicenseCategory> {
         new LicenseCategory("Microsoft 365", true, MudBlazor.Color.Primary),
-        new LicenseCategory("Office 365", true, MudBlazor.Color.Secondary),
+        new LicenseCategory("Office 365", false, MudBlazor.Color.Secondary),
         new LicenseCategory("Business apps", true, MudBlazor.Color.Warning),
         new LicenseCategory("Communication", true, MudBlazor.Color.Info),
         new LicenseCategory("Dynamics 365", true, MudBlazor.Color.Tertiary),

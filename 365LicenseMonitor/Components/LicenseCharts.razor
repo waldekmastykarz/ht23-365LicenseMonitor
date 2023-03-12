@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @using Microsoft.Graph
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 @attribute [Authorize]
 
 <MudGrid>
@@ -7,10 +8,14 @@
         <MudText Typo="Typo.h5">License Charts</MudText>
     </MudItem>
     <MudItem xs="9" md="3">
-        <MudSelect T="string" Label="Show or hide categories" HelperText="" SelectAll="true" MultiSelection="true">
+        <MudSelect T="string" Label="Show or hide categories" HelperText="" SelectAll="true" MultiSelection="true" @bind-SelectedValues="selectedCategories" OnOpen="PopulateOptions" OnClose="SaveCategoryList">
             @foreach (var category in License.CategoryList)
             {
-                <MudSelectItem T="string" Value="@category.CategoryName">@category.CategoryName</MudSelectItem>
+                List<License> filteredLicenseList = LicenseList.Where(x => x.Category == category.CategoryName).ToList();
+                if (filteredLicenseList.Count > 0) // only show categories in the list
+                {
+                    <MudSelectItem T="string" Value="@category.CategoryName">@category.CategoryName</MudSelectItem>
+                }
             }
         </MudSelect>
     </MudItem>
