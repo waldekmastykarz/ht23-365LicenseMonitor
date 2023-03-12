@@ -3,6 +3,7 @@
     partial class LicenseTable
 {
         private bool _loading;
+        private string searchString1 = "";
 
         private IEnumerable<Microsoft.Graph.SubscribedSku>? subscribedSkus;
 
@@ -21,5 +22,16 @@
                 LicenseList.Add(lic);
             }
         }
+
+        private bool FilterFunc1(License element) => FilterFunc(element, searchString1);
+        private bool FilterFunc(License element, string searchString)
+        {
+            if (string.IsNullOrWhiteSpace(searchString))
+                return true;
+            if (element.ProductName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+            return false;
+        }
+
     }
 }

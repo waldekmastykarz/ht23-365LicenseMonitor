@@ -8,7 +8,18 @@
     <p><em>Loading...</em></p>
 }
 else {
-    <MudAvatar Size=@PhotoSize Image="@($"data:image/png;base64,{image}")" />
+
+    if (image.Length < 1000) // image is small if user has not uploaded an image
+    {
+        <MudAvatar>
+            <MudIcon Size=@PhotoSize Icon="@Icons.Material.Filled.Person" />
+        </MudAvatar>
+    }
+    else
+    {
+        <MudAvatar Size=@PhotoSize Image="@($"data:image/png;base64,{image}")" />
+    }
+
 }
 
 @code {
@@ -18,8 +29,16 @@ else {
 
     protected override async Task OnInitializedAsync()
     {
-        photo = await GraphClient.Me.Photo.Content.Request().GetAsync();
-        image = Convert.ToBase64String((photo as MemoryStream).ToArray());
+        try
+        {
+            photo = await GraphClient.Me.Photo.Content.Request().GetAsync();
+            image = Convert.ToBase64String((photo as MemoryStream).ToArray());
+        }
+        catch (ServiceException ex)
+        {
+            Console.WriteLine("Photo was not found");
+        }
+
     }
 
     [Parameter]

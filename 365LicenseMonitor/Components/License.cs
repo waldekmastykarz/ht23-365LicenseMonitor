@@ -458,7 +458,8 @@ namespace _365LicenseMonitor.Components
             ["a929cd4d-8672-47c9-8664-159c1f322ba8"] = new LicenseProperty("Microsoft Intune Suite Trial", "Security and identity"),
             ["4b74a65c-8b4a-4fc8-9f6b-5177ed11ddfa"] = new LicenseProperty("Power Virtual Agents Viral Trial", "Power Platform"),
             ["6070a4c8-34c6-4937-8dfb-39bbc6397a60"] = new LicenseProperty("Microsoft Teams Rooms Standard", "Communication"),
-            ["3f9f06f5-3c31-472c-985f-62d9c10ec167"] = new LicenseProperty("Power Pages vTrial for Makers", "Power Platform")
+            ["3f9f06f5-3c31-472c-985f-62d9c10ec167"] = new LicenseProperty("Power Pages vTrial for Makers", "Power Platform"),
+            ["556640c0-53ea-4773-907d-29c55332983f"] = new LicenseProperty("Microsoft Cloud for Sustainability vTrial", "Business apps")
         };
 
     }
