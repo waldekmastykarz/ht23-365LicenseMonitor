@@ -1,7 +1,7 @@
 # 365 License Monitor
 
 [![Hack Together: Microsoft Graph and .NET](https://img.shields.io/badge/Microsoft%20-Hack--Together-orange?style=for-the-badge&logo=microsoft)](https://github.com/microsoft/hack-together)
-![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fhsclater)
+![Twitter URL](https://img.shields.io/twitter/url?style=for-the-badge&url=https%3A%2F%2Ftwitter.com%2Fhsclater)
 
 Created for [Microsoft Hack Together](https://github.com/microsoft/hack-together)
 
