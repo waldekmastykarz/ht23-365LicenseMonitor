@@ -39,11 +39,13 @@ namespace _365LicenseMonitor.Shared
             {
                 _isDarkMode = false;
                 await localStorage.SetItemAsync("darkmode", false);
+                headerStyle = "drawer-image-dark";
             }
             else
             {
                 _isDarkMode = true;
                 await localStorage.SetItemAsync("darkmode", true);
+                headerStyle = "drawer-image-light";
             }
         }
 
@@ -69,6 +71,7 @@ namespace _365LicenseMonitor.Shared
             // Load dark mode setting from localStorage
             var result1 = await localStorage.GetItemAsync<bool>("darkmode");
             _isDarkMode = result1 ? result1 : false;
+            if (_isDarkMode ) { headerStyle = "drawer-image-light"; }
         }
 
         // Reset local storage

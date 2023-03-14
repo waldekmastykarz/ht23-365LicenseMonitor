@@ -1,12 +1,12 @@
 
 .drawer-image-dark {
-    background-image: url(hakathon_200.png);
+    background-image: url(logo_transparent_dark_200.png);
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .drawer-image-light {
-    background-image: url(hakathon_200.png);
+    background-image: url(logo_transparent_200.png);
     background-repeat: no-repeat;
     background-position: center;
 }
