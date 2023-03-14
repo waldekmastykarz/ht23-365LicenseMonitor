@@ -1,6 +1,6 @@
 {
-  "name": "_365LicenseMonitor",
-  "short_name": "_365LicenseMonitor",
+  "name": "365 License Monitor",
+  "short_name": "365 License Monitor",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
