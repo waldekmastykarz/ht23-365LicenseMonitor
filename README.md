@@ -26,12 +26,17 @@ Welcome to my hack! This project was created for the Microsoft Graph Hack Togeth
 - Easily see which licenses have run out, or have spare. This can help larger organisations either maintain an adequate pool of spare licenses for new joiners, or smaller organisations save money by avoiding waste.
 - Quickly identify the status of licenses which are important, filtering out those that aren't.
 - Group and filter licenses by category, or search for licenses by name.
+- Give access to other users, for instance procurement, who may not otherwise have access to see licenses.
+
+
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+
+- Multi-tenant - just run the app and click to install in your tenant.
+- Progressive Web App - run in your browser, or install it on any platform.
+- Responsive design - adapts to any size screen.
+- Dark mode!
+- Persistent settings using browser local storage.
 
 
 ## Tech Stack
@@ -43,19 +48,26 @@ The app has been created using:
 - Graph SDK
 - Azure Static Web Apps
 
+Packages:
+- WebAssembly
+- Microsoft.Graph
+- Blazored.LocalStorage
+- MudBlazor
+
 ## Screenshots
 
 ![App Screenshot](https://cloudrun.co.uk/wp-content/uploads/2023/03/license_monitor.png)
 
 ## Installation
 
-No install required, it's a web app!
+No installation is required, it's a web app!
 
-Either build the app from this repo, or you can just run the published app from https://365licensemonitor.app.cloudrun.io/. No installation is required, however you can install it as a web app, by clicking the install icon in the address bar.
+Either build the app from this repo, or you can just run the published app from https://365licensemonitor.app.cloudrun.io/. No installation is required, however you can install it as a web app, by clicking the install icon in the address bar. 
+
+You will need to grant access to your tenant - tick the box to Consent as a global admin the first time you run it.
 
 If you have access to multiple tenants, it is suggested that you create a browser profile for each 365 tenant that you have access to, in order to avoid issues with being signed into the wrong account. Then install the app under each profile - it will only show in your list of apps once, but you can switch between tenants in the app.
 
-    
 ## Testing in a demo tenant
 
 If you are using a Sandbox tenant, there is only one included license (Microsoft 365 E5 Developer) so it won't be very interesting, so if testing in a Sandbox you can add some trial licenses:
@@ -78,7 +90,7 @@ Once installed in your tenant, you can limit who can use the app in your tenant,
 - Also if you didn't consent for the organisation when you first ran it, you can do so on the Permissions page, 'Grant admin consent'.
 ## Authors
 
-- [@cloudhal](https://www.github.com/cloudhal)
+[@cloudhal](https://www.github.com/cloudhal)
 
 
 ## Contributing
