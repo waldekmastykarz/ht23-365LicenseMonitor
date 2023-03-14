@@ -15,7 +15,7 @@ Created for [Microsoft Hack Together](https://github.com/microsoft/hack-together
 
 # 365 License Monitor
 
-Welcome to my hack! This project was created for the Microsoft Graph Hack Together at Microsoft Hack Together.
+Welcome to my hack! This project was created for the Microsoft Graph Hack Together.
 
 
 
