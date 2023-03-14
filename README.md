@@ -40,10 +40,11 @@ The app has been created using:
 - Blazor WebAssembly
 - .NET 7.0
 - Graph SDK
+- Azure Static Web Apps
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://cloudrun.co.uk/wp-content/uploads/2023/03/license_monitor.png)
 
 ## Installation
 
