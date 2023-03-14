@@ -39,11 +39,13 @@ namespace _365LicenseMonitor.Shared
             {
                 _isDarkMode = false;
                 await localStorage.SetItemAsync("darkmode", false);
+                headerStyle = "drawer-image-dark";
             }
             else
             {
                 _isDarkMode = true;
                 await localStorage.SetItemAsync("darkmode", true);
+                headerStyle = "drawer-image-light";
             }
         }
 
