@@ -2,6 +2,7 @@
 
 [![Hack Together: Microsoft Graph and .NET](https://img.shields.io/badge/Microsoft%20-Hack--Together-orange?style=for-the-badge&logo=microsoft)](https://github.com/microsoft/hack-together)
 [![Twitter URL](https://img.shields.io/twitter/url?style=for-the-badge&url=https%3A%2F%2Ftwitter.com%2Fhsclater)](https://twitter.com/hsclater)
+[![Azure Static Web Apps CI/CD](https://github.com/cloudhal/365LicenseMonitor/actions/workflows/azure-static-web-apps-orange-meadow-0c3e81803.yml/badge.svg)](https://github.com/cloudhal/365LicenseMonitor/actions/workflows/azure-static-web-apps-orange-meadow-0c3e81803.yml)
 
 Created for [Microsoft Hack Together](https://github.com/microsoft/hack-together)
 
