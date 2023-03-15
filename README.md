@@ -54,9 +54,11 @@ Packages:
 - Blazored.LocalStorage
 - MudBlazor
 
-## Screenshots
+## Screenshots and video
 
 ![App Screenshot](https://cloudrun.co.uk/wp-content/uploads/2023/03/license_monitor.png)
+
+[![VIDEO OVERVIEW](https://img.youtube.com/vi/vEBaLPhuizE/0.jpg)](https://youtu.be/vEBaLPhuizE)
 
 ## Installation
 
