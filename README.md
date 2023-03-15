@@ -64,7 +64,9 @@ No installation is required, it's a web app!
 
 Either build the app from this repo, or you can just run the published app from https://365licensemonitor.app.cloudrun.io/. No installation is required, however you can install it as a web app, by clicking the install icon in the address bar. 
 
-You will need to grant access to your tenant - tick the box to Consent as a global admin the first time you run it.
+You will need to grant access to your tenant - tick the box to Consent as a global admin the first time you run it. Note that currently (I'm not sure why) you will also need to go into Azure AD to consent again before it will work:
+- Azure AD > Enterprise Applications > 365 License Monitor > Permissions > Grant Consent.
+
 
 If you have access to multiple tenants, it is suggested that you create a browser profile for each 365 tenant that you have access to, in order to avoid issues with being signed into the wrong account. Then install the app under each profile - it will only show in your list of apps once, but you can switch between tenants in the app.
 
